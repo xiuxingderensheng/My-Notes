@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>header、hgroup、h1~h6以及footer</title>
+	<style type="text/css">
+		b{
+			color: blue;
+		}
+	</style>
+</head>
+<body>
+	<b>带有一个标题的文章</b>
+	<article>
+		<h1>Article heading</h1>
+		<p>Content...</p>
+	</article>
+	<br />
+	<b>带有标题和元数据的文章&lt;header&gt;</b>
+	<article>
+		<header>
+			<h1>Article heading</h1>
+			<p>(<time datetime="2016-12-13" pubdate>13th December, 2016</time>)</p>
+		</header>
+		<p>Content...</p>
+	</article>
+	<b>以&lt;hgroup&gt;封装副标题的文章</b>
+	<article>
+		<hgroup>
+			<h1>Article heading</h1>
+			<h2>Article subheading</h2>
+		</hgroup>
+		<p>Content...</p>
+	</article>
+	<b>带有标题、副标题和元数据的文章</b>
+	<article>
+		<header>
+			<hgroup>
+				<h1>Article heading</h1>
+				<h2>Article subheading</h2>
+			</hgroup>
+			<p>(<time datetime="2016-12-13" pubdate>13th December, 2016</time>)</p>
+		</header>
+		<p>Content...</p>
+	</article>
+</body>
+</html>
