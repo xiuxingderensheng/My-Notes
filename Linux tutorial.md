@@ -1,3 +1,5 @@
+[TOC]
+
 #Linux 常用命令#
 
 ##(1)linux命令。
@@ -97,7 +99,7 @@ cat 文件名1 文件名2 ... > 文件名3
 cat 文件名2 ... >> 文件名1
 
 ###3)cp命令。
-实现文件的复制好。  
+实现文件的复制。  
 cp [选项] <源文件> <目标>  
 选项：-i表示安全询问的方式复制。  
 目标可以是目标路径，也可以是目标路径下的文件名。
@@ -259,6 +261,7 @@ tar [选项] [备份包的文件名] [要打包的（或解包）的文件或目
 * tar -cf filename.tar file1 file2 file3
 * tar -tf filename.tar
 * tar -xf filename.tar
+
 ***无论如何，似乎必须要有-f参数后跟一个.tar后缀名的文件才能执行。***
 
 ##(6)磁盘操作命令。
@@ -297,6 +300,7 @@ mount [-t vfstype] [-o 选项] device dir
   * fdisk -l || more /proc/partitions
   * mkdir -p /mnt/usbhd1 && mkdir -p /mnt/usbhd2
   * mount -t ntfs /dev/sdc1/ /mnt/usbhd1 && mount -t vfat /dev/sdc5 /mnt/usbhd2
+
 ***NTFS格式的磁盘分区用-t ntfs，fat32格式的磁盘分区用-t vfat。***
 ***如果汉字显示乱码，可以加上-o iocharset=cp936选项。***
 
@@ -472,13 +476,13 @@ cal [选项 [月份 [年份]]]
     * 链接字
 
 ###2)进程的启动
-前台启动和后台启动。
-**1. 前台方式启动**
-终端输入Linux命令，回车执行启动进程。按Ctrl+Z挂起，ps命令查看进程。
-下面是ps命令的用法
-【功能】查看进程的信息。
-【格式】
-ps [选项]
+前台启动和后台启动。  
+**1. 前台方式启动**  
+终端输入Linux命令，回车执行启动进程。按Ctrl+Z挂起，ps命令查看进程。  
+下面是ps命令的用法  
+【功能】查看进程的信息。  
+【格式】  
+ps [选项]  
 【选项】
 * -e：显示所有进程。
 * -a：显示所有终端下的所有进程。
