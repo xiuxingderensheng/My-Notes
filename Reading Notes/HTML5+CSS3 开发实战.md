@@ -288,3 +288,45 @@ SVG 比较适用于图表和分辨率独立的图形、动画交互的用户界�
 
 
 #第 6 章 为 Web 应用程序铺平道路
+
+HTML5表单的一些新元素和新属性。实现了优雅降级和良好的交互性，也为表单验证提供了原生的支持，提高了开发效率。另外，HTML5的API也为Web应用程序铺平了道路。
+
+
+#第 7 章  CSS3简介
+
+##7.7  级联/特性和继承
+
+###7.7.1  级联
+
+* （1）来自浏览器的用户代理样式
+* （2）用户样式
+* （3）作者样式
+* （4）标记为 !important 的作者样式
+* （5）标记为 !important 的用户样式
+
+###7.7.2  计算特性
+
+有4个级别：  
+* a = 内敛样式(1000)
+* b = ID选择器的总数(100)
+* c = 类和属性选择器以及伪类的数量(10)
+* d = 类型选择器和伪元素的数量(1)
+
+例如：  
+* style="color:red;": (a,b,c,d) = (1,0,0,0) 1000
+* #comments #respond{...}: (a,b,c,d) = (0,2,0,0) 200
+* #respond input[type="checkbox"]{...}: (a,b,c,d) = (0,1,1,1) 111
+* body#blog article.hentry p:first-child{...}: (a,b,c,d) = (0,1,2,3) 123
+* body#blog article[role="main"] p:first-child{...}: ~ = (0,1,2,3) 123
+
+###7.7.3  CSS继承
+
+例如：  
+article, section, h1, h2, h3, ol, ul, dl, p {font-family: georgia, serif;}  
+or  
+body {font-family: georgia, serif;}  
+font-family 属性由主体的子元素继承，直到另一种样式将其重写为止。  
+***虽然不是自动继承所有CSS属性，但是可以通过 inherit 强制继承。inherit 在低于 IE8 的版本上不能运行，除了 direction 和 visibility 属性外。***
+
+##7.8  CSS组织和维护
+
