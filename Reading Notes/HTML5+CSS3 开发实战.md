@@ -78,7 +78,7 @@
 
 ###3.3.2  选用哪一个
 （1）被封装的内容在馈送阅读器中会有完整意义吗？是，则用 article   
-（2）被封装的内容相关吗？如果是，则用 section 。
+（2）被封装的内容相关吗？如果是，则用 section 。  
 （3）如果没有语义关系，则用 div 。
 
 ###3.3.3  使用这些元素的基本结构
@@ -146,4 +146,145 @@ HTML4的一些元素的表现式定义是以它们的屏幕外观为基础的，
 * &lt;em&gt;原来是强调，现在是重音强调。
 * &lt;strong&gt;原来是着重强调，现在用于表现十分重要的内容。而在希望用斜体而不带隐含的强调时，使用&lt;i&gt;。&lt;em&gt;中嵌套&lt;em&gt;表示等级。
 * &lt;small&gt;用于表示旁注，如小字号印刷体，主要用于表示一些不重要的。
+* &lt;hr&gt;原来是一条水平线，现在用作 “段落级的主题分隔” 。
+* &lt;s&gt;原来是删除线，现在用于表示 “不再相关或不准确” 的内容。
+* &lt;u&gt;原来是下划线文本，现在表示一段发音不清、虽已显示渲染但并非正文注释的文本。
 
+
+##4.2  带有&lt;a&gt;元素的块级链接
+
+在&lt;a&gt;标签中先嵌套一层&lt;div&gt;标签可以在一定程度上避免样式误差，尤其是在Firefox浏览器中。
+
+##4.3  其他 HTML4 略有变化的元素
+
+```
+<!-- type: 1/a/A/i/I;attr: "start" and "value" and "reversed" -->
+<ol type="a" reversed>
+    <li value="5">5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+</ol>
+
+<!-- dl元素用于表现关联列表，由零个或多个 “键/值对” 组成。 -->
+<dl>
+    <dt><strong>处理器</strong></dt>
+    <dd>高通骁龙835低配版</dd>
+    <dd>高通骁龙835标准版</dd>
+    <dd>高通骁龙835高配版</dd>
+    <dt><strong>屏幕</strong></dt>
+    <dd>3D曲面玻璃</dd>
+    <dt><strong>分辨率</strong></dt>
+    <dd>2K屏</dd>
+</dl>
+
+<blockquote>
+    <p>
+        <!-- mark元素既不是强调也不影响重要性，用于表现作为参考的文本。 -->
+        <strong>Dogs are the best!</strong>They are <em>obviously</em> much cooler than monkeys, even if <mark>the 
+        first animal in space was a monkey</mark>.
+    </p>
+</blockquote>
+
+<!-- datetime属性使得时间有了机器可读性。当然，也可以用data-*代替。 -->
+今天是<time datetime="2016-12-21">公元2016年12月21日</time>。PM2.5为<data value="132">132</data>，轻度污染，
+比昨天的<data value="482">482</data>要好！
+
+```
+
+
+
+#第 5 章  富媒体
+
+##5.2  HTML5 的视频之路
+没有一种单一的容器和编解码器组合能够在所有HTML5浏览器中工作。所以需要对视频进行多次编码。
+还可以增加Flash备用文案，用于不支持VP8的HTML5浏览器。
+
+```
+<h2>All Three (WebM, MP4, OGG) by HTML5</h2>
+    <video poster="poster.jpg" controls="controls" width="720" height="405">
+        <!-- video的src去掉，source的type必须要有，保留download链接，三个source的顺序也很重要。 -->
+        <source src="gordoinspace.mp4" type="video/mp4">
+        <source src="gordoinspace.webm" type="video/vp8">
+        <source src="gordoinspace.ogv" type="video/ogg">
+        Download <a href="gordoinspace.webm">Gordo in Space</a> the movie.
+    </video>
+
+    <h2>All Three (WebM, MP4, OGG) by HTML5 and Flash</h2>
+    <video poster="assets/poster.jpg" controls width="720" height="405">
+        <source src="assets/big_buck_bunny.mp4" type="video/mp4" />
+        <source src="assets/big_buck_bunny.webm" type="video/vp8" />
+        <source src="assets/big_buck_bunny.ogv" type="video/ogg" />
+        <object id="player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" name="player" width="720" height="429"> 
+            <param name="movie" value="player.swf" /> 
+            <param name="allowfullscreen" value="true" /> 
+            <param name="allowscriptaccess" value="always" /> 
+            <param name="flashvars" value="file=assets/big_buck_bunny.mp4&image=assets/poster.jpg" /> 
+            <embed 
+                type="application/x-shockwave-flash"
+                id="player2"
+                name="player2"
+                src="player.swf" 
+                width="720" 
+                height="429"
+                allowscriptaccess="always" 
+                allowfullscreen="true"
+                flashvars="file=file=assets/big_buck_bunny.mp4&image=assets/poster.jpg" 
+            />
+            <!-- 图片用于提醒尚未安装Flash的用户 -->
+            <img src="assets/poster.jpg" title="No video playback capabilities, please download the video below">
+            <p>Your browser doesn't support video, please <a href="assets/big_buck_bunny.webm">download it</a>.</p>
+        </object> 
+    </video>
+
+    <h2>添加字幕支持，使用track元素</h2>
+    <video src="gordoinspace.webm" width="720" height="405" poster="poster.jpg" controls="controls">
+        <!-- vtt是一种 WebVTT文件，用于标记外部文本轨道。 -->
+        <track kind="subtitles" src="gordo_subtitles_en.vtt" srclang="en" label="English" />
+        <track kind="subtitles" src="gordo_subtitles_de.vtt" srclang="de" label="Deutsch" />
+        <track kind="subtitles" src="gordo_subtitles_fr.vtt" srclang="fr" label="Francais" />
+    </video>
+```
+
+##5.3  音频
+audio 和 video 很相似。
+
+###5.3.1  音频解码器
+* Vorbis
+* MP3
+* AAC
+* WAV
+* MP4
+
+```
+<audio controls="">
+    <source src="gordo_interview.mp3" type="audio/mp3">
+    <source src="gordo_interview.aac" type="audio/aac">
+    <source src="gordo_interview.ogg" type="audio/ogg">
+    Download <a href="gordo_interview.ogg">Gordo interview</a>.
+</audio>
+```
+
+##5.4  Canvas
+
+##5.5  SVG
+Scalable Vector Graphics(SVG，可缩放矢量图)。SVG 并不是 HTML5 的一部分，但 HTML5 可以嵌入内联的 SVG 。
+
+SVG 比较适用于图表和分辨率独立的图形、动画交互的用户界面或矢量图像编辑。canvas 适合于游戏、位图图像处理、光栅图形以及图像分析。
+
+```
+<svg xmlns="http://www.w3.org/2000/svg" width="400px" height="400px" version="1.1">
+    <defs>
+        <linearGradient id="TestGradient" gradientTransform="rotate(45)">
+            <stop offset="0%" stop-color="#6c88ba" />
+            <stop offset="90%" stop-color="#677794" />
+            <stop offset="100%" stop-color="#6e747f" />
+        </linearGradient>
+    </defs>
+
+    <circle fill="url(#TestGradient)" stroke="black" cx="150" cy="150" r="150" />
+</svg>
+```
+
+
+#第 6 章 为 Web 应用程序铺平道路
