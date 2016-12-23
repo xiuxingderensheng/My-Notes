@@ -330,3 +330,136 @@ font-family 属性由主体的子元素继承，直到另一种样式将其重�
 
 ##7.8  CSS组织和维护
 
+###7.8.1  CSS协定
+
+**1. 写成多行**  
+```
+h1 {
+    font-family: Georgia;
+    color: green;
+    line-height: 1.3;
+}
+/* instead of below */
+h1 {font-family: Georgia;color: green;line-height: 1.3;}
+```
+
+**2. 排列声明**  
+单个规则集里可以按字母顺序/类型/相关性排列，甚至可以组合起来使用。  
+例如下面就是按字母顺序排序的：  
+```
+header {
+    background: #f8f8f8 url(img/bg.png);
+    border-bottom: 1px solid #ccc;
+    color: #333;
+    font-family: Georgia;
+    font-size: 16px;
+    font-weight: normal;
+    height: 60px;
+    left: 0;
+    line-height: 1.5;
+    margin: 0 auto;
+    padding: 5px 20px;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+```
+按照类型分组排列：  
+1. Position
+2. Display and box model
+3. Font and typography
+4. Color
+5. Background and borders
+
+```
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 60px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    font-family: Georgia;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #333;
+    background: #f8f8f8 url(ima/bg.png);
+    border-bottom: 1px solid #ccc;
+}
+```
+**3. 规则集可以按照骨架来排序**  
+当然，也可以按照自己的偏好来排序。
+
+**4. 命名约定**  
+命名可以是描述性的和语义的，它们应该描述内容而不是表示。例如：  
+```
+.bigLeftCol {...}
+.littleRightCol {...}
+/* 下面的示例更精确地描述了内容而不是表示 */
+.primary-content {...}
+.secondary-content {...}
+```
+当然，CamelCase 命名法也有人用，但不是很推荐。
+
+###7.8.2  注释最佳实践
+```
+/*-----------------------------------------------------------
+[Master sheet]
+
+Project:          Animals in Space
+URL:              http://thewebevolved.com
+Version:          1.1
+Creator:          Rich Clark
+Last changed:     01/02/12
+Last Updated:     Oli Studholme
+Primary use:      Demo site for book
+-----------------------------------------------------------*/
+
+/*-----------------------------------------------------------
+Table of contents
+
+1. Reset
+2. Typography
+3. Basic layout
+4. Widgets
+5. Media items
+6. Forms
+7. Media queries
+8. IE specific styles
+-----------------------------------------------------------*/
+
+/*-----------------------------------------------------------
+ξWidgets
+-----------------------------------------------------------*/
+
+/*-----------------------------------------------------------
+Color reference sheet
+
+Background:      #f8f8f8 (off white)
+Body text:       #444 (dark grey)
+Headings:        #888 (light grey)
+:link            #0090D2 (blue)
+:hover,
+:active,
+:focus:          #0063A6 (dark blue)
+-----------------------------------------------------------*/
+
+/*-----------------------------------------------------------
+Typography reference sheet
+
+Body copy:         1.2em/1.6em Goergia serif;
+Headers:           2.7em/1.3em Helvetica, Arial, "Lucida Sans Unicode",
+... ...
+-----------------------------------------------------------*/
+```
+
+
+
+
+
+
+
+
+
