@@ -530,6 +530,33 @@ IE专用的填充物：
 * CSS3 PIE
 
 
+#第 8 章  使用 CSS 选择器使标记尽量简短
+
+##8.1  选择器概述
+
+CSS1 引入了以下选择器：  
+
+* 类型 （例如，p {...}, blockquote {...}）
+* 后继组合器 （例如，p blockquote {...}）
+* ID
+* 类
+* 链接伪类 （例如，a:link {...} 或 a:visited {...}）
+* 用户动作伪类 （例如，a:active {...}）
+* :first-line 伪元素（例如，p:first-line {...}）
+* :first-letter 伪元素（例如，p:first-letter{...}）
+
+CSS2.1 添加了另外11个选择器
+s
+* 通用（例如，* {...}）
+* 用户动作伪类（例如，a:hover {...} 和 a:focus {...}）
+* :lang() 伪类（例如，article: lang(fr) {...}）
+* 结构伪类（例如，p:first-child {...}）
+* :before 和 :after 伪类 （例如，blockquote:before {...} 或 blockquote:after {...}）
+* 子组合器（例如，h2 > p {...}）
+* 同级组合器（h2 + p {...}）
+* 特性选择器（例如，input[required] {...}）
+* 特性选择器；精确等于（例如，input[type="checkbox"] {...}）
+* 
 
 
 
