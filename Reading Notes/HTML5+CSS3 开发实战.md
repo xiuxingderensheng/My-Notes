@@ -546,7 +546,7 @@ CSS1 引入了以下选择器：
 * :first-letter 伪元素（例如，p:first-letter{...}）
 
 CSS2.1 添加了另外11个选择器
-s
+
 * 通用（例如，* {...}）
 * 用户动作伪类（例如，a:hover {...} 和 a:focus {...}）
 * :lang() 伪类（例如，article: lang(fr) {...}）
@@ -556,7 +556,117 @@ s
 * 同级组合器（h2 + p {...}）
 * 特性选择器（例如，input[required] {...}）
 * 特性选择器；精确等于（例如，input[type="checkbox"] {...}）
-* 
+* 子串特性选择器；一等于字符串（例如，input[class~="long-field"] {...}）
+* 子串特性选择器；字符串台的开头用连字符分隔（例如，input[lang|="en"] {...}）
+
+CSS3 中添加的一些选择器：  
+
+* 一般同级组合器（例如，h1~pre {...}）
+* 子串特性选择器；字符串以子串开头（例如，a[href^="http://"] {...}）
+* 子串特性选择器；字符串以子串结尾（例如，a[href$=".pdf"] {...}）
+* 子串特性选择器；字符串包含子串（例如，a[href*="twitter"] {...}）
+* :target 伪类（例如，section: target {...}）
+* 结构伪类；:nth-child （例如，tr: nth-child(even) td {...}）
+* 结构伪类；:nth-last-child （例如，tr: nth-last-child(-n+5) td {...}）
+* 结构伪类；:last-child （例如，ul li: last-child {...}）
+* 结构伪类；:only-child （例如，ul li: only-child {...}）
+* 结构伪类；:first-of-type （例如，p: first-of-type {...}）
+* 结构伪类；:last-of-type （例如，p: last-of-type {...}）
+* 结构伪类；:nth-of-type （例如，li: nth-of-type(3n) {...}）
+* 结构伪类；:nth-last-of-type （例如，li: nth-last-of-type(1) {...}）
+* 结构伪类；:only-of-type （例如，article img:only-of-type {...}）
+* 结构伪类；:empty （例如，aside:empty {...}）
+* 结构伪类；:root （例如，:root {...}）
+* UI 元素状态伪类；:disabled 和 :enabled （例如，input:disabled {...}）
+* UI 元素状态伪类；:checked （例如，input[type="checkbox"]:checked {...}）
+* 否定伪类；:not （例如，abbr:not([title]) {...}）
+
+
+##8.2  CSS3 选择器
+
+###8.2.1  组合器
+
+子组合器只会选择父元素中的直接子元素。即只选孩子不选孙子。而后继选择器会选择在父元素内部的孩子以及孙子等。
+
+```
+article > p {
+    font-size: 125%;
+}
+```
+
+邻近同级选择器会选择文档树中彼此相邻，且有相同父元素的元素。
+
+```
+h2 + p {
+    font-weight: bold;
+}
+```
+
+下面的代码说明了哪个选择器会选择哪个段落：
+
+```
+<article>
+    <h1>Article title</h1>
+    <p>...</p><!-- Child combinator targets this paragraph -->
+    <section>
+        <h2>Section title</h2>
+        <p>...</p><!-- Adjacent sibling combinator targets this paragraph -->
+        <p>...</p>
+    </section>
+    <p>...</p><!-- Child combinator targets this paragraph -->
+</article>
+```
+
+CSS3 中还加入了一般同级选择器，第二个选择器不需要紧跟在第一个后面。
+
+```
+h3 ~ ul {
+    list-style-type: binary;
+}
+```
+
+下面是综合三种组合选择器的例子：
+
+```
+<article>
+    <h1>Article title</h1>
+    <p>...</p><!-- Child combinator targets this paragraph -->
+    <section>
+        <h2>Section title</h2>
+        <p>...</p><!-- Adjacent sibling combinator targets this paragraph -->
+        <p>...</p>
+        <ul>
+            <li>...</li>
+            <li>...</li>
+            <li>...</li>
+        </ul>
+        <section>
+            <h3>Section Title</h3>
+            <p>...</p>
+            <p>...</p>
+            <ul><!-- General sibling combinator targets this list -->
+                <li>...</li>
+                <li>...</li>
+                <li>...</li>
+            </ul>
+        </section>
+    </section>
+    <p>...</p><!-- Child combinator targets this paragraph -->
+</article>
+```
+
+###8.2.2  特性和子串选择器
+
+###8.2.3  UI元素状态伪类
+s
+例如：  
+
+* input: disabled
+* input[type="checkbox"]:checked+label
+* input[type="text"]:enabled, input[type="password"]:enabled
+
+
+###8.2.4  Target 伪类
 
 
 
