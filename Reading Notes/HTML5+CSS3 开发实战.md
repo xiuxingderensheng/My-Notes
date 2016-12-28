@@ -668,6 +668,159 @@ s
 
 ###8.2.4  Target 伪类
 
+当 a 标签的 href 属性指向某元素的 ID 时，单击链接后就可以通过 :target 找到 ID 所对应的元素。  
+具体实例见 test8_2_4.html 和 test8_2_4'.html 。
+
+
+###8.2.5  结构伪类
+
+**1. :first-child**  
+
+选择给定元素的第一个子元素。
+
+**2. :last-child**  
+
+选择给定元素的最后一个子元素。
+
+**3. :nth-child**
+
+选择给定父元素的一个或多个特定的子元素。根据所给的参数而定。它可以将数字（整数）/关键字（odd 或 even）或计算式（表达式）作为参数。  
+例如：  
+
+* :nth-child：偶数
+* :nth-child(2n)：每隔一行指定样式，0，4，6，...
+* :nth-child(4n)：每隔三行指定样式
+* :nth-child(4n+2)：从第二行开始，每隔三行指定样式
+* :nth-child(-n+5)：-表示从后往前数。选出前五个元素
+
+**4. :nth-last-child**  
+
+与 :nth-child 类似，只不过是从后往前计数。
+
+例如：  
+
+* nth-last-child(-n+5)：选出后5个元素。
+
+**5. :only-child**  
+
+选出父元素的唯一子元素。  
+例如：  
+
+* ul li:only-child {...}
+
+**6. :first-of-type**  
+
+“类型” 伪类的工作方式与 “子元素” 选择器相同，其关键区别是 “类型” 伪类只选择与应用了选择器的元素类型相同的元素。即 “类型” 伪类是按标签类型来选择的，“子元素” 选择器是根据父子关系来选择的。  
+
+**7. :last-of-type**  
+
+例如s：  
+
+* nav li:last-of-type {...}：给 nav 元素中的多个 li 元素中的最后一个添加样式
+
+**8. :nth-of-type**  
+
+**9. :nth-last-of-type**  
+
+**10. :only-of-type**  
+
+**11. :empty**  
+
+:empty 表示没有内容的元素。  
+
+**12. :root**
+
+选中 html 元素。
+
+
+###8.2.6  伪元素
+
+伪元素用 “::” 以区分伪类。
+
+**1. ::before 和 ::after**  
+
+::before 和 ::after 伪元素用于在元素的内容（或另一个伪元素）之前或之后生成内容。因此，对于有空内容模式的元素，例如&lt;img&gt;和&lt;input&gt;，不能使用 ::before 和 ::after。  
+伪元素生成的内容有 content 属性提供，它可以带有一下一个或多个值：  
+
+* **字符串：**文本内容
+* **URL：**外部资源的URL
+* **计数器：**自动生成元素的编号
+* **特性值：**带有指定特性值的字符串
+* **左右引号：**值用引号属性中的字符串代替
+* **无左右引号：**没有引入内容，但增加了嵌套层数
+
+```
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>test</title>
+<style type="text/css">
+a#one::after {
+	content: "\2191";
+}
+p:nth-of-type(2n) {
+	position: relative;
+}s
+a[href^="http://"]:hover::after, a[href^="http://"]:focus::after {
+	content: attr(href) ;
+	position: absolute;
+	width: auto;
+	bottom: -22px;
+	left: 0;
+	padding: 0 5px;
+	color: #444;
+}
+p:last-of-type {
+	position: relative;
+}
+a#three:hover::after, a#three:focus::after {
+	content: "External Link" attr(href);
+	position: absolute;
+	width: auto;
+	bottom: -22px;
+	left: 0;
+	padding: 0 5px;
+	color: #444;
+}
+</style>
+<head>
+<p><a href="#" id="one">Back to top</a></p>
+<p><a href="http://www.baidu.com" id="two">baidu.com</a></p>
+<p><a href="www.google.com" id="three">google.com</a></p>
+</html>
+```
+
+**2. 进一步研究伪元素**  
+
+伪元素的潜能很大，应用范围也很广，包括页面翻卷/自动给各部分或各章编号等。甚至可以在打印的样式表中包含URL。  
+下面是两个可以深入了解伪元素的链接：  
+
+* [1](www.w3.org/TR/2009/CR-CSS2-20090908/generate.html)
+* [2](www.w3.org/TR/css3-content/)
+
+###8.2.7  否定伪类
+
+选择不匹配选择器参数的元素。  
+
+```
+input:not([type="submit"]) {
+    width: 250px;
+    border: 1px dotted red;
+}
+```
+
+
+##8.3  浏览器支持
+
+CSS3 选择器在IE9+/Firefox 3.5+/Chrome 4+/Safari 4+ 和 Opera 10+ 上获得完全支持。但IE6/IE7/IE8 不支持CSS3 选择器（IE7/IE8 支持一般同级组合器/:first-child 和所有特性选择器）。可以用jQuery解决。  
+
+
+#第 9 章  每种情形的布局
+
+
+
+
 
 
 
