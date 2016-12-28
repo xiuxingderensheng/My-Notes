@@ -1,4 +1,5 @@
-s#第二章 初始 HTML5
+[TOC]
+#第二章 初始 HTML5
 ##2.3  “Hello World” 旅程
 ###2.3.4  HTML5 “严格” 风格的 “Hello World!”
 ```
