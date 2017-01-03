@@ -819,6 +819,259 @@ CSS3 选择器在IE9+/Firefox 3.5+/Chrome 4+/Safari 4+ 和 Opera 10+ 上获得�
 
 #第 9 章  每种情形的布局
 
+##9.2  CSS 的可见格式化模型——方框
+
+每个要显示的元素都是由一个或多个方框组成。这些方框可以有不同的属性，可以用不同的方式彼此交互，但最基本的事实是，所有东西都是方框。自然，CSS 有一个模型——框模型。
+
+**1. 带 display: block 的块级方框**  
+
+* 与其包含的元素同宽
+* 在页面上垂直向下排列
+* 高度是包含内容所需的高度
+* 替代的内容（如图像）默认使用其自己固有的宽高
+
+
+**2. 宽度和高度算法**  
+
+* 总宽度 = margin-left + border-left + padding-left-width + width + padding-right + border-right-width + margin-right
+* 总高度 = margin-top + border-top-width + padding-top + height + padding-bottom + border-bottom-width + margin-bottom
+
+
+**3. box-sizing**  
+
+谨慎使用，最好保持默认的 content-box，业界默认。
+
+
+**4. 块级方框的外边距**  
+
+* 正的外边距（margin）会增加方框周围的空间
+* 负的外边距：
+    * 宽高是固定值：移动元素
+    * 宽高 auto：移动元素，也可能是拉伸元素
+
+
+**5. 折叠垂直外边距**
+
+文档流中，在同一格式化上下文中的两个垂直方向上的相邻元素，会出现垂直外边距折叠。  
+即两个元素之间的外边距等于较大的外边距。
+
+**6. 带 display: inline 的内联方框**  
+
+* 内联方框元素与其内容长度相同
+* 类似与高亮显示其
+* 如果需要可以跨多行
+* 不能包含块级方框
+* 替代的内容包括链接和内嵌的元素，如图像和视频：
+    * 默认使用其固有尺寸
+    * 还使用与块级内容相同的框模型，内边距和外边距会影响元素的所有边
+* 内联非替代元素（一般意味着是文本）从 font-size 和 line-height 中获得其高度：
+    * 内联非替代元素只在文本流方向应用内边距和外边距
+    * 负的外边距会使元素移动
+    * 在垂直方向上默认与基线对齐
+    * line-height:0; 可以阻止内联元素大于默认行框
+    * 图像内联，就要使用 vertical-align: center;
+
+
+**7. 其他用于显示的值**  
+
+* display: inline-block;：行为与内联替代元素相同，如图像
+
+
+**8. 匿名方框**  
+
+```
+<!-- “some inline content” 是块级匿名方框 -->
+<div>
+    Some inline content
+    <p>An <strong>important</strong> block-level paragraph</p>
+</div>
+```
+
+
+**9. 定位方案和 position 属性**  
+
+position:  
+
+* static：默认属性，元素处于文档流中
+* relative：脱离文档流，其原有空间还在，大小不变，会与其他元素重叠，也可用于给绝对定位元素提供包含块
+* absolute：如果没有设置width，会缩小为内容的宽度，其原有空间消失，相对与第一个非static定位的祖先来移动
+* fixed：一种特殊的绝对定位，以浏览器窗口为参考
+
+
+**10. 图层和 z-index 属性**  
+
+z-index 决定脱离文档流的图层的堆叠顺序
+
+
+**11. Float**  
+
+* 除非元素有固定宽高，否则一般与加上一个 width 属性
+* 脱离文档流
+* 非浮动块级元素会忽略浮动元素，上移填补空隙
+* 内联元素和内联方框仍会给浮动元素腾出空间
+* 浮动元素不会被其父元素包含
+
+
+**12. 清理浮动元素**  
+
+* clear 属性：clear: left; 表示该元素的左边不能存在浮动元素
+* 简单的清理方法（.clearfix）：
+* 使容器浮动：
+* overflow 属性：
+
+
+**13. 块格式化上下文**  
+
+块格式化上下文默认包含的元素：  
+
+* 浮动的元素
+* position 值不是 static 或 relative 的元素
+* 不是块级方框的块容器（display 值为 inline-block/table-cell 和 table-caption）
+* overflow 值不是 visible 的块级方框
+
+
+**14. 用于布局的浮动元素**  
+
+
+**15. 双列布局方法**  
+
+
+**16. 三列或多列布局方法**  
+
+
+**17. 模拟占据整个页高的列的背景**  
+
+Chris Coyier 的 CSS Tricks。
+
+
+**18. 用负的外边距改变列的顺序**
+
+
+**19. 布局使用不同单位的效果**  
+
+三个得到广泛支持的单位（像素/百分数和 em）在用于布局尺寸时，有不同的属性。
+
+
+**20. 像素布局**  
+
+内容主要放在固定宽度的视口中时，给布局使用像素尺寸是不错的，尤其是替代内容。但是移动设备基本不使用像素布局。  
+
+
+**21. 灵活的布局**  
+
+
+**22. 流体布局**  
+
+流体布局使用百分数定义水平尺寸，调整浏览器的宽度，防止令人生畏的水平滚动条。  
+灵活布局最适合内容也很灵活的页面。内容较宽或宽度固定时需要特别小心。
+对于替代内容，一种解决方法是使用 mix-width 。防止图像的固有宽度破坏布局。
+
+
+**23. 流体布局的浏览器支持情况**  
+
+浏览器必须把百分数转换为像素才能显示。
+
+* 向下取整：WebKit（Safari，Chrome），Opera
+* 向上取整：Internet Explorer 6 和 7
+* 向上和向下取整：Firefox，IE 8+
+
+浏览器的支持情况不同，开发的时候需要仔细地做全面的测试。
+
+
+**24. 弹性布局的排版问题**  
+
+弹性布局给水平尺寸使用 em ，em 基于浏览器的字号。默认情况下，1 em = 16 像素。  
+同样，可以使用 max-width 来防止尺寸过大破坏布局或产生水平滚动条。
+
+
+**25. 在混合布局中尽可能灵活**  
+
+一般用于合并固定宽度的内容和流体内容。
+混合布局的一个优点是，可以利用每个技术的长处。
+
+
+**26. 其他 CSS 2.1 布局方法**  
+
+最基本的工作是：  
+
+* 使列并排布局
+* 设置列宽
+
+
+**27. 给布局使用 display: inline-block**  
+
+带 display: inline-block 的元素会并排显示，宽度也会缩小到内容大小。  
+可以使用 text-align: justify; 等属性均匀地布置其子元素。  
+使用 text-align: center; 使元素居中。  
+使用 vertical-align: top; 属性使一组方框在各个行上按顺序排列。
+
+IE6 和 IE7 不支持 inline-block ，可以应用 display: inline; 和 zoom: 1; 解决。  
+使用 inline-block 的元素之间会有一个小空隙，因为 CSS 会合并 HTML 元素之间的空白。  
+解决方法：  
+
+* 把所有内容放在同一行上
+* 把闭合标记放在下一个 inline-block 元素的开标记旁边，其中没有空格
+* li 元素实现的导航栏，因为在 HTML5中这些元素是自闭合的。但不适用与 div / section 等元素。
+* 甚至可以在 HTML 注释中包含换行符。
+
+
+**28. 给布局使用 display: table;**  
+
+pc 端还可以，移动端不行。
+
+
+**29. 比较 inline-block 和 table 布局**  
+
+
+**30. 媒体查询和响应性 Web 设计**  
+
+
+**31. 媒体查询**  
+
+例如  
+
+```
+@media screen and (min-width: 24em) {
+    body {...}
+}
+@media screen and (min-width: 42em) {
+    body {...}
+}
+```
+
+媒体查询除了在样式表&lt;link&gt;元素中作为一个特性包含，在样式表中作为@media 块包含外，还可以在@import 规则中使用媒体查询。并且建议使用 @import 。  
+
+
+**32. 媒体查询语法**  
+
+例如：  
+
+* screen and (min-width: 534px):
+* screen and (max-width: 960px), screen and (max-height: 960px):
+* screen and (min-widht: 20em), screen and (max-width: 32em):
+* screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2), screen and  
+(max-width: 480px) and (min-resolution: 192dpi):
+
+
+**33. 桌面为先/移动设备为先和内容为先的设计**  
+
+现在的做法是：PC 和 移动端都调用相同的后台，然后根据设备的不同返回不同的页面，也就是说针对不同的设备设计多套页面，但后台是一样的。
+
+
+**3.4. 媒体查询的浏览器支持**  
+
+
+**3.5. 手机上的视口**  
+
+```
+<!-- 把视口的宽度设置为设备的宽度，且不缩放内容 -->
+<meta name="viewport" content="device-width, initial-scale=1.0">
+```
+
+
+**3.6. 图像的问题**  
+
+
 
 
 
