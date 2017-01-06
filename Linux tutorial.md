@@ -308,7 +308,7 @@ mount [-t vfstype] [-o 选项] device dir
  
 举例：  
 
-* 挂接U盘。
+*挂接U盘。
     * fdisk -l
     * mkdir -p /mnt/usb
     * mount -t vfat /dev/sdd1 /mnt/usb
