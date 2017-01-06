@@ -15,7 +15,7 @@ jQuery 的核心特性为：
 
 ###1.2  总体架构
 
-<center>![jQuery 的模块分类和主要依赖关系](./photos/jQuery 的模块分类和主要依赖关系.png)
+<center>![jQuery 的模块分类和主要依赖关系](./photos/jQuery 的模块分类和主要依赖关系.png)</center>
 
 ```
 (function(window, undefined) {
@@ -44,9 +44,52 @@ jQuery 的核心特性为：
     window.jQuery = window.$ = jQuery;
 })(window);
 ```
+
+###1.3  自调用匿名函数
+
+```
+(function(window, undefined) {
+  var jQuery = ...
+  //...
+  window.jQuery = Window.$ = jQuery;
+}(window);
+```
+
+**1)为什么要创建一个自调用匿名函数？**  
+
+通过创建一个自调用匿名函数，创建了一个特殊的函数作用域，该函数作用域中的代码不会和已有的同名函数/方法和变量以及第三方库冲突。  
+
+自调用匿名函数的三种写法：
+
+```
+//写法一（常见写法）
+(function() {
+  //...
+})();
+
+//写法二
+(function() {
+  //...
+}());
+
+//写法三
+!function() {
+  //...
+}();
+```
+
+
 #第二部分  构造 jQuery 对象
 
 ##第 2 章  构造 jQuery 对象
+
+jQuery 对象是一个类数组对象，含有连续的整型属性/length 属性和大量的 jQuery方法。jQuery 对象由构造函数 jQuery() 创建，$() 则是 jQuery() 的缩写。
+
+###2.1  构造函数 jQuery()
+
+构造函数 jQuery() 有 7 种用法：  
+        
+![构造函数 jQuery()](./photos/构造函数 jQuery().png)
 
 
 #第三部分  底层支持模块
