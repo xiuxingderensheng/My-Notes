@@ -88,8 +88,75 @@ jQuery 对象是一个类数组对象，含有连续的整型属性/length 属�
 ###2.1  构造函数 jQuery()
 
 构造函数 jQuery() 有 7 种用法：  
-        
-![构造函数 jQuery()](./photos/构造函数 jQuery().png)
+
+![构造函数 jQuery()](./photos/构造函数 jQuery.png)
+
+```
+//高内聚低耦合的写法，原型链的应用以节约内存
+(function(window, undefined) {
+  //构造 jQuery 对象
+  var jQuery = (function() {
+    var jQuery = function(selector, context) {
+      return new jQuery.fn.init(selector, context, rootjQuery);
+    },
+    //一对局部变量声明
+  jQuery.fn = jQuery.prototype = {
+    constructor: jQuery,
+    init: function(selector, context, rootjQuery){...},
+  };
+  jQuery.fn.init.prototype = jQuery.fn;
+  jQuery.extend = jQuery.fn.extend = function() {...};
+  jQuery.extend({
+    //一堆静态属性和方法
+  });
+  return jQuery;
+  })();
+  //省略其他模块的代码
+  window.jQuery = window.$ = jQuery;
+})(window);
+```
+
+###2.3  jQuery.fn.init( selector, context, rootjQuery )
+
+![jQuery.fn.init(selector,context,rootjQuery)](./photos/jQuery.fn.init.png)
+
+###2.4  jQuery.buildFragment(args, nodes, scripts)
+
+![buildFragment](./photos/buildFragment.png)
+
+###2.5  jQuery.clean(elems, context, fragment, scripts)
+
+![clean](./photos/clean.png)
+
+###2.6  jQuery.extend()/jQuery.fn.extend()
+
+
+###2.7  原形属性和方法
+
+* .constructor：指向构造函数 jQuery()。
+* .init(selector, context, rootjQuery)：构造函数，返回jQuery.fn.init()的实例。
+* .selector：记录 jQuery 查找和过滤 DOM 元素时的选择器表达式。
+* .jquery：正在使用的 jQuery 版本号。
+* .length：jQuery 对象中的元素个数。
+* .size()：返回当前 jQuery 对象中元素的个数。
+* toArray()：将当前的 jQuery 对象转换为真正的数组。
+* .get(index)：返回当前 jQuery 对象中指定位置的元素或包含了全部元素的数组
+* .pushStack(elements, name, arguments)：根据 DOM 元素创建一个 jQuery 对象并返回。
+* .each(function(index,Element))：遍历当前 jQuery 对象中的元素并在每个元素上执行回调函数。
+* .ready(handler)：绑定 ready 事件。
+* .eq(index)：将匹配元素集合缩减为位于指定位置的新元素。
+* .first()：将匹配元素缩减为集合中的第一个元素。
+* .last()：将匹配元素缩减为集合中的最后一个元素。
+* slice()：将匹配的元素缩减为指定范围的子集
+* .map(callback(index, domElement))：遍历当前 jQuery 对象中的一个元素，并在每个元素上执行回调函数，将回调函数的返回值放入一个新的 jQuery 对象中。
+* end()：结束当前链条中最近的筛选操作，并将匹配元素集合还原为之前的状态。
+* push()：Array.prototype.push。
+* sort()：[].sort 。
+* splice()：[].splice 。
+
+###2.8  静态属性和方法
+
+![jQuery静态属性和方法](./photos/jQuery静态属性和方法.png)
 
 
 #第三部分  底层支持模块
