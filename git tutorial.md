@@ -74,4 +74,15 @@ git log -p master..origin/master
 
 git merge origin/master
 ```
+##创建ssh连接##
+
+1)ssh-keygen -t rsa -C user.email
+
+2)按 3 次回车键
+
+3)ssh-add ~/.ssh/id_rsa
+
+4)clip < ~/.ssh/id_rsa.pub
+
+5)到github中添加ssh
 
