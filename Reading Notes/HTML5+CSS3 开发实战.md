@@ -77,7 +77,7 @@
 * **&lt;section&gt;：**文档或应用程序的一般性小节（“节”、“片段”、“部分”）。
 * **&lt;article&gt;：**文档或网站的一个独立的小节。
 
-###3.3.2  选用哪一个
+###3.3.2  选用哪一个  
 （1）被封装的内容在馈送阅读器中会有完整意义吗？是，则用 article   
 （2）被封装的内容相关吗？如果是，则用 section 。  
 （3）如果没有语义关系，则用 div 。
@@ -182,7 +182,7 @@ HTML4的一些元素的表现式定义是以它们的屏幕外观为基础的，
 <blockquote>
     <p>
         <!-- mark元素既不是强调也不影响重要性，用于表现作为参考的文本。 -->
-        <strong>Dogs are the best!</strong>They are <em>obviously</em> much cooler than monkeys, even if <mark>the 
+        <strong>Dogs are the best!</strong>They are <em>obviously</em> much cooler than monkeys, even if <mark>the
         first animal in space was a monkey</mark>.
     </p>
 </blockquote>
@@ -216,26 +216,26 @@ HTML4的一些元素的表现式定义是以它们的屏幕外观为基础的，
         <source src="assets/big_buck_bunny.mp4" type="video/mp4" />
         <source src="assets/big_buck_bunny.webm" type="video/vp8" />
         <source src="assets/big_buck_bunny.ogv" type="video/ogg" />
-        <object id="player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" name="player" width="720" height="429"> 
-            <param name="movie" value="player.swf" /> 
-            <param name="allowfullscreen" value="true" /> 
-            <param name="allowscriptaccess" value="always" /> 
-            <param name="flashvars" value="file=assets/big_buck_bunny.mp4&image=assets/poster.jpg" /> 
-            <embed 
+        <object id="player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" name="player" width="720" height="429">
+            <param name="movie" value="player.swf" />
+            <param name="allowfullscreen" value="true" />
+            <param name="allowscriptaccess" value="always" />
+            <param name="flashvars" value="file=assets/big_buck_bunny.mp4&image=assets/poster.jpg" />
+            <embed
                 type="application/x-shockwave-flash"
                 id="player2"
                 name="player2"
-                src="player.swf" 
-                width="720" 
+                src="player.swf"
+                width="720"
                 height="429"
-                allowscriptaccess="always" 
+                allowscriptaccess="always"
                 allowfullscreen="true"
-                flashvars="file=file=assets/big_buck_bunny.mp4&image=assets/poster.jpg" 
+                flashvars="file=file=assets/big_buck_bunny.mp4&image=assets/poster.jpg"
             />
             <!-- 图片用于提醒尚未安装Flash的用户 -->
             <img src="assets/poster.jpg" title="No video playback capabilities, please download the video below">
             <p>Your browser doesn't support video, please <a href="assets/big_buck_bunny.webm">download it</a>.</p>
-        </object> 
+        </object>
     </video>
 
     <h2>添加字幕支持，使用track元素</h2>
@@ -1070,14 +1070,3 @@ pc 端还可以，移动端不行。
 
 
 **3.6. 图像的问题**  
-
-
-
-
-
-
-
-
-
-
-
